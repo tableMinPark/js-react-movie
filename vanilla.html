@@ -4,35 +4,31 @@
     </body>
     <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-
-    <!-- JSX를 사용하기 위한 babel (아래의 script에 type을 지정해줘야함) -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                        
     <script type="text/babel">
         const root = document.getElementById("root");
+        let counter = 0;
 
-        // Not use JSX
-        // const Title = React.createElement("h3", {onMouseEnter: () => console.log("mouse enter")}, "Hello I'm a title");
-        // const Button = React.createElement("button", {onClick: () => console.log("im clicked")}, "Click me");
-        // const Container = React.createElement("div", null, [Title, Button]);
+        function countUp(){
+            counter = counter + 1;
+            render();
+        }
 
-        // Use JSX
-        const Title = () => (
-            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-                Hello I'm a title
-            </h3>);
+        function render(){
+            ReactDOM.render(<Container />, root);
+        }
 
-        const Button = () => (
-            <button style={{backgroundColor: "tomato"}} onClick={() => console.log("im clicked")}>
-                Click me
-            </button>);
-        // 모든 컴포넌트는 앞자리가 대문자여야한다. (ex. Button 은 상관없지만 button 은 컴포넌트와 이름이 겹치기 때문)
-        const Container = (
-            <div>
-                <Title />      
-                <Button />
-            </div>);
-
-        ReactDOM.render(Container, root);
+        // Container가 실행될때 한번만 render되기 때문에 UI를 업데이트 하지 않으면 counter가 변하지 않는다. (내부적으로는 counter 증가 but 화면상에는 변하지 않음)
+        function Container () {
+            return(
+                <div>
+                    <h3>Total clicks: {counter}</h3>                
+                    <button onClick={countUp}>Click me</button>
+                </div>
+            );
+        }
+        
+        render();
     </script>
 </html>
 
