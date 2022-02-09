@@ -7,17 +7,18 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                        
     <script type="text/babel">
 
-        // 첫번 째 매개변수에는 Object가 있으며, Object에는 함께 호출된 매개변수들이 위치한다.
-        function Btn({ text, big }){
+        function Btn({ text, onClick }){
+            console.log(text, " was rendered")
             return (
                 <button 
+                    onClick={onClick}
                     style={{
                         backgroundColor: "tomato",
                         color: "white",
                         padding: "10px 20px",
                         border: 0,
                         borderRadius: 10,
-                        fontSize: big ? 20 : 10,        // 매개변수로 받은 big이 true이면 fondSize가 20, true가 아니면 10
+                        fontSize: 10,
                     }}
                 >
                     {text}
@@ -25,12 +26,17 @@
             );
         }
 
+        // Btn의 변경사항(prop의 변경)이 없으면 리렌더링하지 않는다. : React.memo();
+        const MemorizedBtn = React.memo(Btn);
+
         function App () {
-            // Btn 컴포넌트의 text값은 변수명으로써 사용자가 정의해도 상관없음 : Btn({text: "Save Changes"}; 호출하는 것과 같다)
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes");
+
             return(
                 <div>
-                    <Btn text="Save Changes" big="true" />
-                    <Btn text="Continue" />
+                    <MemorizedBtn text={value} onClick={changeValue} />
+                    <MemorizedBtn text="Continue" />
                 </div>
             );
         }
