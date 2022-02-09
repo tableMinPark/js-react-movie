@@ -7,14 +7,17 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                        
     <script type="text/babel">
         const root = document.getElementById("root");
-        
+
         function App () {
-            const [counter, modifier] = React.useState(0);  // 배열에 있는 요소를 변수로 바로 맵핑해준다. counter <- 0 / modifier <- f
+            const [counter, setCounter] = React.useState(0);  // 배열에 있는 요소를 변수로 바로 맵핑해준다. counter <- 0 / modifier <- f
+            const onClick = () => {
+                setCounter(counter + 1);    // setCounter를 통해 값을 변경하고, 변경 후에는 컴포넌트의 변경된 값만 업데이트해준다. (ex. counter가 변경되기 때문에 모든 컴포넌트가 업데이트 되는게 아닌 counter만 변경됨)
+            }
 
             return(
                 <div>
                     <h3>Total clicks: {counter}</h3>                
-                    <button>Click me</button>
+                    <button onClick={onClick}>Click me</button>
                 </div>
             );
         }
