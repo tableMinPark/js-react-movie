@@ -1,36 +1,18 @@
 <!DOCTYPE html>
     <body>
-        <div id="root"></div>
+        <span>Total clicks: 0</span>
+        <button id="btn">Click me</button>
     </body>
-    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                        
-    <script type="text/babel">
-        const root = document.getElementById("root");
+    <script>
         let counter = 0;
+        const button = document.querySelector("#btn");
+        const span = document.querySelector("span");
 
-        function countUp(){
+        function handleClick(){
             counter = counter + 1;
-            render();
+            span.innerText = `Total clicks: ${counter}`;
         }
 
-        function render(){
-            ReactDOM.render(<Container />, root);
-        }
-
-        // Container가 실행될때 한번만 render되기 때문에 UI를 업데이트 하지 않으면 counter가 변하지 않는다. (내부적으로는 counter 증가 but 화면상에는 변하지 않음)
-        function Container () {
-            return(
-                <div>
-                    <h3>Total clicks: {counter}</h3>                
-                    <button onClick={countUp}>Click me</button>
-                </div>
-            );
-        }
-        
-        render();
+        button.addEventListener("click", handleClick);
     </script>
 </html>
-
-
-

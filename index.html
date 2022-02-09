@@ -1,18 +1,24 @@
 <!DOCTYPE html>
     <body>
-        <span>Total clicks: 0</span>
-        <button id="btn">Click me</button>
+        <div id="root"></div>
     </body>
-    <script>
-        let counter = 0;
-        const button = document.querySelector("#btn");
-        const span = document.querySelector("span");
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>                        
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        
+        function App () {
+            const [counter, modifier] = React.useState(0);  // 배열에 있는 요소를 변수로 바로 맵핑해준다. counter <- 0 / modifier <- f
 
-        function handleClick(){
-            counter = counter + 1;
-            span.innerText = `Total clicks: ${counter}`;
+            return(
+                <div>
+                    <h3>Total clicks: {counter}</h3>                
+                    <button>Click me</button>
+                </div>
+            );
         }
 
-        button.addEventListener("click", handleClick);
+        ReactDOM.render(<App />, root);
     </script>
 </html>
