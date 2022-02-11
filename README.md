@@ -6,7 +6,7 @@
 ### ✔ React 프로젝트 초기화
 1. [node.js 설치](https://nodejs.org/)
 2. npx create-react-app [프로젝트명]
-3. run start (개발서버 실행, src 생성)
+3. npm start (개발서버 실행, src 생성)
 <br/>
 
 ### ✔ React 프로젝트 GitHub Pages 배포
